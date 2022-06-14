@@ -47,7 +47,6 @@ fn add_val_to_list(list: &mut Option<Box<ListNode>>, val: i32) {
     }
 
     let mut next_node = &mut list.as_mut().unwrap().next;
-
     match &mut next_node {
         Some(_) => add_val_to_list(next_node, val),
         None => *next_node = Some(Box::new(ListNode::new(val))) ,
