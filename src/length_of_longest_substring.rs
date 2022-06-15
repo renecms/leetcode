@@ -1,4 +1,4 @@
-use std::{collections::HashMap, cmp};
+use std::{cmp, collections::HashMap};
 
 pub fn length_of_longest_substring(s: String) -> i32 {
     let mut longest: usize = 0;
@@ -8,9 +8,9 @@ pub fn length_of_longest_substring(s: String) -> i32 {
     for (i, char) in s.chars().enumerate() {
         if let Some(value) = map.get(&char) {
             substring_start_index = cmp::max(substring_start_index, *value);
-        } 
+        }
         longest = cmp::max(longest, i - substring_start_index + 1);
-        map.insert(char, i+1);
+        map.insert(char, i + 1);
     }
 
     longest as i32

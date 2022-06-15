@@ -63,7 +63,7 @@ fn add_val_to_list(list: &mut Option<Box<ListNode>>, val: i32) {
 
 #[cfg(test)]
 mod tests {
-    use crate::add_two_numbers::{ListNode, add_two_numbers};
+    use crate::add_two_numbers::{add_two_numbers, ListNode};
 
     #[test]
     fn test() {
