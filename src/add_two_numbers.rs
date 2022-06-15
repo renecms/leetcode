@@ -31,13 +31,13 @@ pub fn add_two_numbers(
         carry_one = sum / 10;
         let sum = sum % 10;
         add_val_to_list(&mut result, sum);
-        current_l1 = if current_l1.is_none() { None } else { current_l1.unwrap().next };
-        current_l2 = if current_l2.is_none() { None } else { current_l2.unwrap().next };
+        current_l1 = if let Some(value) = current_l1 { value.next } else { None };
+        current_l2 = if let Some(value) = current_l2 { value.next } else { None };
     }
     if carry_one == 1 {
         add_val_to_list(&mut result, 1);
     }
-    return result;
+    result
 }
 
 fn add_val_to_list(list: &mut Option<Box<ListNode>>, val: i32) {
