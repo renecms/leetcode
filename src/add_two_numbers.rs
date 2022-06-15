@@ -20,7 +20,7 @@ pub fn add_two_numbers(
     let mut current_l2 = l2;
     let mut result = None;
     let mut carry_one = 0;
-    
+
     while current_l1.is_some() || current_l2.is_some() {
         let sum = match (&current_l1, &current_l2) {
             (None, None) => carry_one,
@@ -31,8 +31,16 @@ pub fn add_two_numbers(
         carry_one = sum / 10;
         let sum = sum % 10;
         add_val_to_list(&mut result, sum);
-        current_l1 = if let Some(value) = current_l1 { value.next } else { None };
-        current_l2 = if let Some(value) = current_l2 { value.next } else { None };
+        current_l1 = if let Some(value) = current_l1 {
+            value.next
+        } else {
+            None
+        };
+        current_l2 = if let Some(value) = current_l2 {
+            value.next
+        } else {
+            None
+        };
     }
     if carry_one == 1 {
         add_val_to_list(&mut result, 1);
@@ -41,7 +49,7 @@ pub fn add_two_numbers(
 }
 
 fn add_val_to_list(list: &mut Option<Box<ListNode>>, val: i32) {
-    if list.is_none()  {
+    if list.is_none() {
         *list = Some(Box::new(ListNode::new(val)));
         return;
     }
@@ -49,33 +57,38 @@ fn add_val_to_list(list: &mut Option<Box<ListNode>>, val: i32) {
     let mut next_node = &mut list.as_mut().unwrap().next;
     match &mut next_node {
         Some(_) => add_val_to_list(next_node, val),
-        None => *next_node = Some(Box::new(ListNode::new(val))) ,
+        None => *next_node = Some(Box::new(ListNode::new(val))),
     }
 }
 
-#[test]
-fn test() {
-    let l1 = Some(Box::new(ListNode {
-        val: 2,
-        next: Some(Box::new(ListNode {
-            val: 4,
-            next: Some(Box::new(ListNode { val: 3, next: None })),
-        })),
-    }));
-    let l2 = Some(Box::new(ListNode {
-        val: 5,
-        next: Some(Box::new(ListNode {
-            val: 6,
-            next: Some(Box::new(ListNode { val: 4, next: None })),
-        })),
-    }));
+#[cfg(test)]
+mod tests {
+    use crate::add_two_numbers::{ListNode, add_two_numbers};
 
-    let result = ListNode {
-        val: 7,
-        next: Some(Box::new(ListNode {
-            val: 0,
-            next: Some(Box::new(ListNode { val: 8, next: None })),
-        })),
-    };
-    assert_eq!(result, *add_two_numbers(l1, l2).unwrap());
+    #[test]
+    fn test() {
+        let l1 = Some(Box::new(ListNode {
+            val: 2,
+            next: Some(Box::new(ListNode {
+                val: 4,
+                next: Some(Box::new(ListNode { val: 3, next: None })),
+            })),
+        }));
+        let l2 = Some(Box::new(ListNode {
+            val: 5,
+            next: Some(Box::new(ListNode {
+                val: 6,
+                next: Some(Box::new(ListNode { val: 4, next: None })),
+            })),
+        }));
+
+        let result = ListNode {
+            val: 7,
+            next: Some(Box::new(ListNode {
+                val: 0,
+                next: Some(Box::new(ListNode { val: 8, next: None })),
+            })),
+        };
+        assert_eq!(result, *add_two_numbers(l1, l2).unwrap());
+    }
 }
