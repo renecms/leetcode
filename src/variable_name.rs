@@ -1,4 +1,4 @@
-fn solution(name: String) -> bool {
+fn _solution(name: String) -> bool {
     for (index, char) in name.chars().enumerate() {
         if index == 0 && char.is_numeric() {
             return false;
@@ -12,12 +12,12 @@ fn solution(name: String) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use crate::variable_name::solution;
+    use crate::variable_name::_solution;
 
     #[test]
     fn variable_name() {
-        assert!(solution("var_1__Int".to_string()));
-        assert!(!solution("qq-q".to_string()));
-        assert!(!solution("2w2".to_string()));
+        assert!(_solution("var_1__Int".to_string()));
+        assert!(!_solution("qq-q".to_string()));
+        assert!(!_solution("2w2".to_string()));
     }
 }

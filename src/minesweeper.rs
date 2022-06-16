@@ -1,4 +1,4 @@
-fn solution(matrix: Vec<Vec<bool>>) -> Vec<Vec<i32>> {
+fn _solution(matrix: Vec<Vec<bool>>) -> Vec<Vec<i32>> {
     let i_size = matrix.len() ;
     let j_size = matrix[0].len();
 
@@ -8,7 +8,7 @@ fn solution(matrix: Vec<Vec<bool>>) -> Vec<Vec<i32>> {
         if let Some(row) = matrix.get(i) {
             for j in 0..j_size {
                 if let Some(true) = row.get(j) {
-                    output_matrix = update_output_matrix(output_matrix, i, j);
+                    output_matrix = _update_output_matrix(output_matrix, i, j);
                 }
             }
         }
@@ -16,7 +16,8 @@ fn solution(matrix: Vec<Vec<bool>>) -> Vec<Vec<i32>> {
     output_matrix
 }
 
-fn update_output_matrix(mut matrix: Vec<Vec<i32>>, i: usize, j: usize) -> Vec<Vec<i32>> {
+#[allow(clippy::needless_range_loop)]
+fn _update_output_matrix(mut matrix: Vec<Vec<i32>>, i: usize, j: usize) -> Vec<Vec<i32>> {
     let lower_i_range = if i >= 1 { i - 1 } else { i };
     let higher_i_range =  if i < matrix.len() - 1 { i + 1 } else { matrix.len() - 1 };
     let lower_j_range = if j >= 1 { j - 1 } else { j };
@@ -34,7 +35,7 @@ fn update_output_matrix(mut matrix: Vec<Vec<i32>>, i: usize, j: usize) -> Vec<Ve
 
 #[cfg(test)]
 mod tests {
-    use super::solution;
+    use super::_solution;
 
     #[test]
     fn minesweeper_3x3() {
@@ -44,7 +45,7 @@ mod tests {
             vec![false, false, false],
         ];
         let answer = vec![vec![1, 2, 1], vec![2, 1, 1], vec![1, 1, 1]];
-        assert_eq!(answer, solution(matrix));
+        assert_eq!(answer, _solution(matrix));
     }
 
     #[test]
@@ -55,6 +56,6 @@ mod tests {
             vec![true, true, false, true],
         ];
         let answer = vec![vec![0, 2, 2, 1], vec![3, 4, 3, 3], vec![1, 2, 3, 1]];
-        assert_eq!(answer, solution(matrix));
+        assert_eq!(answer, _solution(matrix));
     }
 }
