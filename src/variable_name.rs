@@ -16,8 +16,8 @@ mod tests {
 
     #[test]
     fn variable_name() {
-        assert_eq!(true, solution("var_1__Int".to_string()));
-        assert_eq!(false, solution("qq-q".to_string()));
-        assert_eq!(false, solution("2w2".to_string()));
+        assert!(solution("var_1__Int".to_string()));
+        assert!(!solution("qq-q".to_string()));
+        assert!(!solution("2w2".to_string()));
     }
 }
