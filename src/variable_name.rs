@@ -7,7 +7,7 @@ fn solution(name: String) -> bool {
             return false;
         }
     }
-    return true;
+    true
 }
 
 #[cfg(test)]

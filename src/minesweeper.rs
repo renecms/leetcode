@@ -25,7 +25,7 @@ fn update_output_matrix(mut matrix: Vec<Vec<i32>>, i: usize, j: usize) -> Vec<Ve
     for y in lower_i_range..=higher_i_range {
         for x in lower_j_range..=higher_j_range {
             if !(y == i && x == j) {
-                matrix[y][x] = matrix[y][x] + 1;
+                matrix[y][x] += 1;
             }
         }
     }
